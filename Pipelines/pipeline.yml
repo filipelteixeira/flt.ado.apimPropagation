@@ -65,6 +65,7 @@ steps:
     deploymentName: 'DeployPipelineTemplate'
 
 - task: AzureWebApp@1
+  displayName: 'Deploy WebAPI'
   inputs:
     azureSubscription: '$(azureServiceConnection)'
     appType: 'webApp'
@@ -72,6 +73,7 @@ steps:
     package: '$(Build.ArtifactStagingDirectory)\Publish\*.zip'
 
 - task: AzureCLI@2
+  displayName: 'Update API Management definition'
   inputs:
     azureSubscription: '$(azureServiceConnection)'
     scriptType: 'ps'
