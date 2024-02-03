@@ -35,12 +35,22 @@ steps:
     publishWebProjects: false
     arguments: '-o $(Build.ArtifactStagingDirectory)\Publish'
     modifyOutputPath: false
+    zipAfterPublish: false
 
 - task: PowerShell@2
   displayName: 'Generate OpenAPI Definition'
   inputs:
     targetType: 'inline'
     script: 'swagger tofile --output $(Build.ArtifactStagingDirectory)\openapi.json $(Build.ArtifactStagingDirectory)\Publish\flt.ado.apimPropagation.Api.dll v1'
+    
+- task: ArchiveFiles@2
+  displayName: 'Zip Deploy Package'
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\Publish'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\Publish\Deployment.zip'
+    replaceExistingArchive: true
 
 - task: AzureResourceManagerTemplateDeployment@3
   displayName: 'Deploy IaC (bicep)'
