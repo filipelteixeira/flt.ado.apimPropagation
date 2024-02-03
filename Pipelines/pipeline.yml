@@ -31,11 +31,13 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: '**/*.csproj'
-    arguments: '-o Publish'
+    arguments: '--output $(Build.ArtifactStagingDirectory)\Publish'
     zipAfterPublish: false
     modifyOutputPath: false
-    workingDirectory: 'WorkingFolder'
+
+- task: PowerShell@2
+  inputs:
+    script: 'swagger tofile --output $(Build.ArtifactStagingDirectory)\openapi.json $(Build.ArtifactStagingDirectory)\Publish\flt.ado.apimPropagation.Api.dll v1'
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:

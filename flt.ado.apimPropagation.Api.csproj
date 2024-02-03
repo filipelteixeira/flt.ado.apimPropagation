@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Deployment\main.bicep" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Deployment\main.bicep" />
   </ItemGroup>
 
