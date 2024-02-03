@@ -13,6 +13,13 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'Install mytool as a dotnet tool'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install --global Swashbuckle.AspNetCore.Cli --version 6.5.0'
+
+- task: DotNetCoreCLI@2
   displayName: 'Restore project'
   inputs:
     command: 'restore'
