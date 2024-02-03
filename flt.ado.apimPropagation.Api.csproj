@@ -19,9 +19,5 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
-  
-  <Target Name="OpenAPI" AfterTargets="Build">
-    <Exec Command="swagger tofile --output openapi.json $(TargetPath) v1" WorkingDirectory="$(TargetDir)" />
-  </Target>
 
 </Project>
