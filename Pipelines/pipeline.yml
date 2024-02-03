@@ -11,6 +11,8 @@ variables:
 
 pool:
   vmImage: 'windows-latest'
+workspace:
+  clean: all
 
 steps:
 - task: DotNetCoreCLI@2
