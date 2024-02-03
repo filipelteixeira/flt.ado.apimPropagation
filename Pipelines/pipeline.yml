@@ -32,7 +32,6 @@ steps:
     command: 'publish'
     publishWebProjects: false
     arguments: '-o $(Build.ArtifactStagingDirectory)\Publish'
-    zipAfterPublish: false
     modifyOutputPath: false
 
 - task: PowerShell@2
@@ -52,3 +51,19 @@ steps:
     csmFile: '$(templateFile)'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: '$(azureServiceConnection)'
+    appType: 'webApp'
+    appName: 'appServiceFltAdoApimPropagation'
+    package: '$(Build.ArtifactStagingDirectory)\Publish\*.zip'
+
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: '$(azureServiceConnection)'
+    scriptType: 'ps'
+    scriptLocation: inlineScript
+    inlineScript: |
+      az apim api import --resource-group $(resourceGroupName) --service-name apiserviceFltAdoApimPropagation --api-id weather --path /weather --display-name flt-ado-apim-propagation --specification-format OpenApi --specification-path $(Build.ArtifactStagingDirectory)\openapi.json
+
