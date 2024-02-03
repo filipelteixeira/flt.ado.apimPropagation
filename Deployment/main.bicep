@@ -73,7 +73,7 @@ param sku string = 'B1'
 ])
 param language string = '.net'
 
-var appServicePlanName = '$appServicePlanFltAdoApimPropagation'
+var appServicePlanName = 'appServicePlanFltAdoApimPropagation'
 
 var configReference = {
   '.net': {
