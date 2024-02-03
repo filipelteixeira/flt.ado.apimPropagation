@@ -1,12 +1,12 @@
 // APIM
 @description('The name of the API Management service instance')
-param apiManagementServiceName string = 'apiservice${uniqueString(resourceGroup().id)}'
+param apiManagementServiceName string = 'apiserviceFltAdoApimPropagation'
 
 @description('The email address of the owner of the service')
 param publisherEmail string = 'filipelteixeira@gmail.com'
 
 @description('The name of the owner of the service')
-param publisherName string = 'Filipe Teixeira'
+param publisherName string = 'flt.'
 
 @description('The pricing tier of this API Management service')
 @allowed([
@@ -44,8 +44,7 @@ resource apiManagementService 'Microsoft.ApiManagement/service@2022-08-01' = {
 
 // App Service
 @description('Web app name.')
-@minLength(2)
-param webAppName string = uniqueString(resourceGroup().id)
+param webAppName string = 'appServiceFltAdoApimPropagation'
 
 
 @description('Describes plan\'s pricing tier and instance size. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/')
@@ -74,7 +73,7 @@ param sku string = 'B1'
 ])
 param language string = '.net'
 
-var appServicePlanName = '${webAppName}appServicePlan'
+var appServicePlanName = '$appServicePlanFltAdoApimPropagation'
 
 var configReference = {
   '.net': {
