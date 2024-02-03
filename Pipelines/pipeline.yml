@@ -13,7 +13,7 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'Install mytool as a dotnet tool'
+  displayName: 'Install Swashbuckle.AspNetCore.Cli v6.5.0'
   inputs:
     command: custom
     custom: tool
