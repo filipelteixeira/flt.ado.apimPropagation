@@ -23,7 +23,6 @@ steps:
   displayName: 'Restore project'
   inputs:
     command: 'restore'
-    projects: '**/*.csproj'
     includeNuGetOrg: true
 
 - task: DotNetCoreCLI@2
@@ -31,12 +30,13 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    arguments: '--output $(Build.ArtifactStagingDirectory)\Publish'
+    arguments: '-o $(Build.ArtifactStagingDirectory)\Publish'
     zipAfterPublish: false
     modifyOutputPath: false
 
 - task: PowerShell@2
   inputs:
+    targetType: 'inline'
     script: 'swagger tofile --output $(Build.ArtifactStagingDirectory)\openapi.json $(Build.ArtifactStagingDirectory)\Publish\flt.ado.apimPropagation.Api.dll v1'
 
 - task: AzureResourceManagerTemplateDeployment@3
