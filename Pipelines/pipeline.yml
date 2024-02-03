@@ -6,6 +6,7 @@ name: Deploy Pipeline
 variables:
   azureServiceConnection: 'demo-flt.ado.apimPropagation'
   resourceGroupName: 'demo-flt.ado.apimPropagation'
+  resourceGroupLocation: 'westeurope'
   templateFile: './Deployment/main.bicep'
 
 pool:
@@ -45,6 +46,7 @@ steps:
     azureResourceManagerConnection: '$(azureServiceConnection)'
     action: 'Create Or Update Resource Group'
     resourceGroupName: '$(resourceGroupName)'
+    location: '$(resourceGroupLocation)'
     csmFile: '$(templateFile)'
     deploymentMode: 'Incremental'
     deploymentName: 'DeployPipelineTemplate'
