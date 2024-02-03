@@ -15,27 +15,27 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'Restore project'
   inputs:
-  command: 'restore'
-  projects: '**/*.csproj'
-  includeNuGetOrg: true
+    command: 'restore'
+    projects: '**/*.csproj'
+    includeNuGetOrg: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish Project'
   inputs:
-  command: 'publish'
-  publishWebProjects: false
-  projects: '**/*.csproj'
-  arguments: '-o Publish'
-  zipAfterPublish: false
-  modifyOutputPath: false
-  workingDirectory: 'WorkingFolder'
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: '-o Publish'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: 'WorkingFolder'
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
-  deploymentScope: 'Resource Group'
-  azureResourceManagerConnection: '$(azureServiceConnection)'
-  action: 'Create Or Update Resource Group'
-  resourceGroupName: '$(resourceGroupName)'
-  csmFile: '$(templateFile)'
-  deploymentMode: 'Incremental'
-  deploymentName: 'DeployPipelineTemplate'
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: '$(azureServiceConnection)'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: '$(resourceGroupName)'
+    csmFile: '$(templateFile)'
+    deploymentMode: 'Incremental'
+    deploymentName: 'DeployPipelineTemplate'
